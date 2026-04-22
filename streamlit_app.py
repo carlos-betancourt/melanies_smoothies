@@ -1,15 +1,4 @@
 import streamlit as st
-import snowflake.connector
-
-cfg = dict(st.secrets["snowflake"])
-conn = snowflake.connector.connect(**cfg)
-
-
-# Import python packages.
-# import snowflake.snowpark
-import streamlit as st
-#from snowflake.snowpark.context import get_active_session
-#from snowflake.snowpark.functions import col
 
 # Write directly to the app.
 st.title(f":cup_with_straw: Customize Your Smoothie :cup_with_straw:")
@@ -23,7 +12,7 @@ st.write('The name on your Smoothie will be: ', name_on_order)
 
 cnx = st.connection("snowflake")
 session = cnx.session()
-my_dataframe = cnx.query("SELECT FRUIT_NAME FROM smoothies.public.fruit_options;", ttl="10m") # cnx.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+my_dataframe = session.query("SELECT FRUIT_NAME FROM smoothies.public.fruit_options;", ttl="10m") # cnx.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 
 ingredients_list = st.multiselect(
     'Chhose up to 5 ingredients:'
