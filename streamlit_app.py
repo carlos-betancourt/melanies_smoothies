@@ -1,3 +1,10 @@
+import streamlit as st
+import snowflake.connector
+
+cfg = dict(st.secrets["snowflake"])
+conn = snowflake.connector.connect(**cfg)
+
+
 # Import python packages.
 # import snowflake.snowpark
 import streamlit as st
